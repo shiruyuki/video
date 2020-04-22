@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${self.title()}</title>
+    <link rel="stylesheet" href="/static/dashboard/css/bootstrap.css">
+    <script src="/static/dashboard/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/dashboard/js/bootstrap.min.js"></script>
+    ${self.css()}
+    ${self.js()}
+</head>
+<body>
+<%include file = "nav.html" />
+<%! from django.urls import reverse %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="${reverse('admin')}" class="list-group-item active">
+                    管理员
+                </a>
+                <a href="#" class="list-group-item">用户</a>
+                <a href="#" class="list-group-item">视频</a>
+
+            </div>
+        </div>
+
+        <div class="col-md-10">
+        ${self.content()}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<%def name = "title()"></%def>
+<%def name = "css()"></%def>
+<%def name = "js()"></%def>
+<%def name = "content()"></%def>
