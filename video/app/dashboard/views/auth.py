@@ -1,8 +1,9 @@
-from ..lib.base_render import render_to_response
+from video.app.lib.base_render import render_to_response
 from django.views.generic import View
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect,reverse
+from django.core.paginator import Page,Paginator
 
 
 class Login(View):
@@ -54,10 +55,4 @@ class Logout(View):
         return redirect(reverse('login'))
 
 
-class AdminMessage(View):
-
-    def get(self,request):
-
-        users = User.objects.filter(is_staff=True)
-        return render_to_response(request,'/dashboard/auth/admin.html',{"users":users})
 
