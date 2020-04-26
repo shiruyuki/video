@@ -1,0 +1,81 @@
+<%inherit file="../base.html" />
+<%! from django.shortcuts import reverse %>
+<%def name="body_title()">
+修改管理员信息
+</%def>
+<%def name="content()">
+<div id="error_kuang" class="alert alert-warning alert-dismissible hide" role="alert">
+  <button type="button" id="close" class="close" ><span aria-hidden="true">&times;</span></button>
+  <strong>提交失败</strong> <span id="error_text">错误</span>
+</div>
+<form class="form-horizontal" id="update_admin_form">
+    ${csrf_token}
+    <div class="form-group">
+        <label for="username" class="col-sm-4 control-label">用户名</label>
+        <div class="col-sm-4">
+            <input type="email" class="form-control" id="username" name="username" placeholder="用户名" value="${user.username}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="confirm_pwd" class="col-sm-4 control-label">用户类型</label>
+        <div class="col-sm-4">
+            <div class="radio">
+                % if user.is_superuser:
+                <label class="radio-inline">
+                    <input type="radio" name="is_superuser"  value="1" checked> 管理员
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="is_superuser"  value="0"> 普通用户
+                </label>
+                % else:
+                <label class="radio-inline">
+                    <input type="radio" name="is_superuser"  value="1" > 管理员
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="is_superuser"  value="0" checked> 普通用户
+                </label>
+                % endif
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="confirm_pwd" class="col-sm-4 control-label">是否可用</label>
+        <div class="col-sm-4">
+            <div class="radio">
+                % if user.is_active:
+                <label class="radio-inline">
+                    <input type="radio" name="is_active"  value="1" checked> 可用
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="is_active"  value="0"> 不可用
+                </label>
+                % else:
+                <label class="radio-inline">
+                    <input type="radio" name="is_active"  value="1" > 可用
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="is_active"  value="0" checked> 不可用
+                </label>
+                % endif
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-1">
+            <button type="button" class="btn btn-primary" onclick="update_admin(${user.id})">提交</button>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-default">返回</button>
+        </div>
+    </div>
+</form>
+
+</%def>
+
+<%def name="js()">
+<script src="/static/dashboard/js/admin.js"></script>
+</%def>
+

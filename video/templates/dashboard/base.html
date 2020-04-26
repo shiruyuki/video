@@ -26,7 +26,15 @@
         </div>
 
         <div class="col-md-10">
-        ${self.content()}
+            <div class="panel panel-primary">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title">${self.body_title()}<span class="glyphicon glyphicon-leaf pull-right"></span></h3>
+            </div>
+            <div class="panel-body">
+                ${self.content()}
+            </div>
+        </div>
+
         </div>
     </div>
 </div>
@@ -35,6 +43,7 @@
 </html>
 ${self.js()}
 <%def name = "title()"></%def>
+<%def name = "body_title()"></%def>
 <%def name = "css()"></%def>
 <%def name = "js()"></%def>
 <%def name = "content()"></%def>
